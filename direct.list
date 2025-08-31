@@ -1,7 +1,37 @@
-# AUTHOR:
-# REPO:
+# --- iOS/Apple: всё напрямую ---
 
-IP-CIDR,10.0.0.0/8
-IP-CIDR,127.0.0.0/8
-IP-CIDR,172.16.0.0/12
-IP-CIDR,192.168.0.0/16
+# Вся автономная сеть Apple (AS714)
+IP-CIDR,17.0.0.0/8,no-resolve
+
+# Базовые домены Apple
+DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,itunes.com
+DOMAIN-SUFFIX,mzstatic.com
+DOMAIN-SUFFIX,aaplimg.com
+DOMAIN-SUFFIX,cdn-apple.com
+DOMAIN-SUFFIX,me.com
+
+# iCloud
+DOMAIN-SUFFIX,icloud.com
+DOMAIN-SUFFIX,icloud-content.com
+
+# App Store / TestFlight / App Store Connect
+DOMAIN-SUFFIX,apps.apple.com
+DOMAIN-SUFFIX,testflight.apple.com
+DOMAIN-SUFFIX,appstoreconnect.apple.com
+
+# Push/Notifications (APNs)
+DOMAIN-SUFFIX,push.apple.com
+DOMAIN-SUFFIX,api.push.apple.com
+DOMAIN-SUFFIX,api.development.push.apple.com
+
+# Активация/конфигурация/обновления iOS
+DOMAIN-SUFFIX,gs.apple.com
+DOMAIN-SUFFIX,albert.apple.com
+DOMAIN-SUFFIX,configuration.apple.com
+DOMAIN-SUFFIX,mesu.apple.com
+DOMAIN-SUFFIX,swcdn.apple.com
+DOMAIN-SUFFIX,swdownload.apple.com
+DOMAIN-SUFFIX,swdist.apple.com
+DOMAIN-SUFFIX,updates.cdn-apple.com
+DOMAIN-SUFFIX,time.apple.com
