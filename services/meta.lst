@@ -1,3 +1,6 @@
+# WhatsApp / Meta ASN
+IP-ASN,32934,no-resolve
+
 DOMAIN-SUFFIX,instagram.com
 DOMAIN-SUFFIX,ig.me
 DOMAIN-SUFFIX,facebook.com
@@ -10,3 +13,7 @@ DOMAIN-SUFFIX,oculus.com
 DOMAIN-SUFFIX,meta.com
 DOMAIN-SUFFIX,threads.net
 DOMAIN-SUFFIX,fb.com
+
+# WhatsApp Domains
+DOMAIN-SUFFIX,whatsapp.com
+DOMAIN-SUFFIX,whatsapp.net
