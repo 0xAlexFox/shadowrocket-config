@@ -35,3 +35,6 @@ DOMAIN-SUFFIX,swdownload.apple.com
 DOMAIN-SUFFIX,swdist.apple.com
 DOMAIN-SUFFIX,updates.cdn-apple.com
 DOMAIN-SUFFIX,time.apple.com
+
+# Курсы по ОЗОН
+DOMAIN-SUFFIX,raytcourse.ru
