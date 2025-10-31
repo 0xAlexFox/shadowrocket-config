@@ -1,0 +1,6 @@
+# Known CDN / IPs observed in logs
+IP-CIDR,104.16.65.21/32,PROXY,no-resolve
+IP-CIDR,108.157.228.186/32,PROXY,no-resolve
+IP-CIDR,52.212.22.237/32,PROXY,no-resolve
+IP-CIDR,52.31.184.207/32,PROXY,no-resolve
+IP-CIDR,35.186.241.51/32,PROXY,no-resolve

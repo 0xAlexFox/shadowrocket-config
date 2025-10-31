@@ -1,0 +1,13 @@
+# Qobuz core domains
+DOMAIN-SUFFIX,qobuz.com,PROXY
+DOMAIN-SUFFIX,cdn.qobuz.com,PROXY
+DOMAIN-SUFFIX,streaming.qobuz.com,PROXY
+DOMAIN-SUFFIX,static.qobuz.com,PROXY
+DOMAIN-SUFFIX,content.qobuz.com,PROXY
+DOMAIN-SUFFIX,play.qobuz.com,PROXY
+DOMAIN-SUFFIX,open.qobuz.com,PROXY
+
+# Analytics / supporting services
+DOMAIN-SUFFIX,app-measurement.com,PROXY
+DOMAIN-SUFFIX,app-analytics-services.com,PROXY
+DOMAIN-SUFFIX,cdn.braze.eu,PROXY
