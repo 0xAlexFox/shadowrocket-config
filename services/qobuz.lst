@@ -1,13 +1,25 @@
 # Qobuz core domains
 DOMAIN-SUFFIX,qobuz.com,PROXY
-DOMAIN-SUFFIX,cdn.qobuz.com,PROXY
-DOMAIN-SUFFIX,streaming.qobuz.com,PROXY
-DOMAIN-SUFFIX,static.qobuz.com,PROXY
-DOMAIN-SUFFIX,content.qobuz.com,PROXY
-DOMAIN-SUFFIX,play.qobuz.com,PROXY
-DOMAIN-SUFFIX,open.qobuz.com,PROXY
+DOMAIN,www.qobuz.com,PROXY
+DOMAIN,api.qobuz.com,PROXY
+DOMAIN,api.music.qobuz.com,PROXY
+DOMAIN,streaming.qobuz.com,PROXY
+DOMAIN,content.qobuz.com,PROXY
+DOMAIN,player.qobuz.com,PROXY
+DOMAIN,qobuzplayer.com,PROXY
+DOMAIN,play.qobuz.com,PROXY
+DOMAIN,cdn.qobuz.com,PROXY
+DOMAIN-SUFFIX,qobuz-cdn.net,PROXY
+DOMAIN-SUFFIX,qobuz.cdnstream.net,PROXY
+DOMAIN-SUFFIX,qobuz.io,PROXY
+DOMAIN-SUFFIX,qobuz.scdnstream.net,PROXY
+DOMAIN-SUFFIX,qobuzcdn.streaming.ad.cdnstream.net,PROXY
 
-# Analytics / supporting services
-DOMAIN-SUFFIX,app-measurement.com,PROXY
-DOMAIN-SUFFIX,app-analytics-services.com,PROXY
-DOMAIN-SUFFIX,cdn.braze.eu,PROXY
+# Akamai/CDN mirrors used by Qobuz
+DOMAIN-SUFFIX,streaming-qobuz-com.akamaized.net,PROXY
+DOMAIN-SUFFIX,qobuz.akamaized.net,PROXY
+DOMAIN-SUFFIX,qobuz-hifi.akamaized.net,PROXY
+DOMAIN-SUFFIX,qobuz-hls.akamaized.net,PROXY
+DOMAIN-SUFFIX,qobuz-hd.akamaihd.net,PROXY
+DOMAIN-SUFFIX,akamaihd.net,PROXY
+DOMAIN-SUFFIX,akamaized.net,PROXY
