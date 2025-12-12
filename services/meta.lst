@@ -17,3 +17,20 @@ DOMAIN-SUFFIX,fb.com
 # WhatsApp Domains
 DOMAIN-SUFFIX,whatsapp.com
 DOMAIN-SUFFIX,whatsapp.net
+DOMAIN,web.whatsapp.com
+DOMAIN,wa.me
+DOMAIN,api.whatsapp.com
+DOMAIN,graph.whatsapp.com
+DOMAIN,g.whatsapp.net
+DOMAIN,mmg.whatsapp.net
+DOMAIN,static.whatsapp.net
+DOMAIN,v.whatsapp.net
+DOMAIN,pps.whatsapp.net
+DOMAIN-SUFFIX,cdn.whatsapp.net
+DOMAIN-SUFFIX,fna.whatsapp.net
+DOMAIN,e11.whatsapp.net
+DOMAIN,e12.whatsapp.net
+DOMAIN,e13.whatsapp.net
+DOMAIN,e14.whatsapp.net
+DOMAIN,e15.whatsapp.net
+DOMAIN,e16.whatsapp.net
