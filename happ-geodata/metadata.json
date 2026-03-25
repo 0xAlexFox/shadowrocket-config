@@ -1,0 +1,17 @@
+{
+  "external_proxy_ruleset_url": "https://raw.githubusercontent.com/itdoginfo/allow-domains/refs/heads/main/Russia/inside-clashx.lst",
+  "github_raw_root": "https://raw.githubusercontent.com/0xAlexFox/shadowrocket-config/refs/heads/master",
+  "tags": {
+    "shadowrocket-direct": {
+      "domains": 24,
+      "cidrs": 1
+    },
+    "shadowrocket-proxy": {
+      "domains": 1206,
+      "cidrs": 291
+    }
+  },
+  "skipped_ip_asn": [
+    "32934"
+  ]
+}
