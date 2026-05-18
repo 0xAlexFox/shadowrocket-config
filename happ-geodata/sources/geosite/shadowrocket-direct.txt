@@ -1,4 +1,7 @@
 DOMAIN-SUFFIX,apple.com
+DOMAIN-SUFFIX,apple-dns.net
+DOMAIN-SUFFIX,apple-cloudkit.com
+DOMAIN-SUFFIX,apple.news
 DOMAIN-SUFFIX,itunes.com
 DOMAIN-SUFFIX,mzstatic.com
 DOMAIN-SUFFIX,aaplimg.com
@@ -16,6 +19,7 @@ DOMAIN-SUFFIX,gs.apple.com
 DOMAIN-SUFFIX,albert.apple.com
 DOMAIN-SUFFIX,configuration.apple.com
 DOMAIN-SUFFIX,mesu.apple.com
+DOMAIN-SUFFIX,xp.apple.com
 DOMAIN-SUFFIX,swcdn.apple.com
 DOMAIN-SUFFIX,swdownload.apple.com
 DOMAIN-SUFFIX,swdist.apple.com

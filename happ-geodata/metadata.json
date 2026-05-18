@@ -3,11 +3,11 @@
   "github_raw_root": "https://raw.githubusercontent.com/0xAlexFox/shadowrocket-config/refs/heads/master",
   "tags": {
     "shadowrocket-direct": {
-      "domains": 24,
+      "domains": 28,
       "cidrs": 1
     },
     "shadowrocket-proxy": {
-      "domains": 1206,
+      "domains": 1244,
       "cidrs": 291
     }
   },
