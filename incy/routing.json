@@ -1,0 +1,32 @@
+{
+  "Name": "Shadowrocket Equivalent (Incy)",
+  "GlobalProxy": "false",
+  "RemoteDNSType": "DoU",
+  "RemoteDNSDomain": "",
+  "RemoteDNSIP": "1.1.1.1",
+  "DomesticDNSType": "DoU",
+  "DomesticDNSDomain": "",
+  "DomesticDNSIP": "77.88.8.8",
+  "Geoipurl": "https://raw.githubusercontent.com/0xAlexFox/shadowrocket-config/refs/heads/master/incy/geoip.dat",
+  "Geositeurl": "https://raw.githubusercontent.com/0xAlexFox/shadowrocket-config/refs/heads/master/incy/geosite.dat",
+  "LastUpdated": "1784210161",
+  "DnsHosts": {
+    "localhost": "127.0.0.1"
+  },
+  "DirectSites": [
+    "geosite:shadowrocket-direct"
+  ],
+  "DirectIp": [
+    "geoip:shadowrocket-direct"
+  ],
+  "ProxySites": [
+    "geosite:shadowrocket-proxy"
+  ],
+  "ProxyIp": [
+    "geoip:shadowrocket-proxy"
+  ],
+  "BlockSites": [],
+  "BlockIp": [],
+  "DomainStrategy": "IPIfNonMatch",
+  "FakeDNS": "false"
+}
