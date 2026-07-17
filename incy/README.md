@@ -1,27 +1,18 @@
 # Incy routing profile
 
-Статический профиль маршрутизации Incy, собранный из правил этого репозитория.
+Статический самодостаточный профиль маршрутизации Incy, собранный из правил этого репозитория.
 
 ## Файлы
 
-- `routing.json` — профиль Incy.
-- `geosite.dat` — компактные доменные правила.
-- `geoip.dat` — компактные IP-правила.
-- `*.sha256` — контрольные суммы, позволяющие Incy не загружать неизменившиеся geodata-файлы повторно.
-
-Используемые теги:
-
-- `geosite:shadowrocket-direct`
-- `geoip:shadowrocket-direct`
-- `geosite:shadowrocket-proxy`
-- `geoip:shadowrocket-proxy`
+- `routing.json` — профиль Incy со всеми доменными и IP-правилами внутри файла.
+- `geosite.dat`, `geoip.dat` и `*.sha256` оставлены для совместимости с другими профилями репозитория, но профиль Incy их не загружает и не использует.
 
 ## Импорт
 
-После публикации файлов в ветке `master` открыть на iPhone:
+После публикации файла открыть на iPhone ссылку через jsDelivr (он используется вместо недоступного напрямую `raw.githubusercontent.com`). Вместо `COMMIT_SHA` указать хэш опубликованного коммита:
 
 ```text
-incy://routing/onadd/https://raw.githubusercontent.com/0xAlexFox/shadowrocket-config/refs/heads/master/incy/routing.json
+incy://routing/onadd/https://cdn.jsdelivr.net/gh/0xAlexFox/shadowrocket-config@COMMIT_SHA/incy/routing.json
 ```
 
 Схема `routing`, в отличие от `autorouting`, выполняет однократный импорт и не привязывает профиль к источнику автоматических обновлений.
@@ -30,10 +21,11 @@ incy://routing/onadd/https://raw.githubusercontent.com/0xAlexFox/shadowrocket-co
 
 При изменении исходных правил:
 
-1. Пересобрать geodata командой `python3 scripts/build_happ_geodata.py`.
-2. Заменить `incy/geosite.dat` и `incy/geoip.dat` свежими файлами из `happ-geodata/`.
-3. Обновить соответствующие файлы `.sha256`.
-4. Установить в `routing.json` поле `LastUpdated` в текущее Unix-время. Новое значение должно быть больше предыдущего.
-5. Опубликовать изменения на GitHub и снова открыть ссылку импорта выше.
+1. Выполнить `python3 scripts/build_happ_geodata.py`. Скрипт обновит правила и сам установит новое значение `LastUpdated`.
+2. Опубликовать изменения на GitHub.
+3. Узнать хэш командой `git rev-parse --short HEAD`.
+4. Подставить хэш вместо `COMMIT_SHA` и открыть ссылку импорта.
+
+Не следует использовать в ссылке `@master`: jsDelivr может кэшировать содержимое ветки. Ссылка с хэшем коммита всегда указывает на точную версию файла.
 
 Профиль имеет постоянное имя, поэтому при большем `LastUpdated` Incy обновит существующую запись вместо создания дубликата.

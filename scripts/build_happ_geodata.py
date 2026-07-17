@@ -5,12 +5,14 @@ from __future__ import annotations
 import ipaddress
 import json
 import subprocess
+import time
 from dataclasses import dataclass
 from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 OUTPUT_ROOT = REPO_ROOT / "happ-geodata"
+INCY_ROOT = REPO_ROOT / "incy"
 SOURCE_ROOT = OUTPUT_ROOT / "sources"
 GEOSITE_SOURCE_ROOT = SOURCE_ROOT / "geosite"
 GEOIP_SOURCE_ROOT = SOURCE_ROOT / "geoip"
@@ -39,7 +41,17 @@ class DomainRule:
 
 def fetch_text(url: str) -> str:
     return subprocess.check_output(
-        ["curl", "-L", "--fail", "--silent", url],
+        [
+            "curl",
+            "-L",
+            "--fail",
+            "--silent",
+            "--connect-timeout",
+            "10",
+            "--max-time",
+            "30",
+            url,
+        ],
         text=True,
     )
 
@@ -173,27 +185,44 @@ def collect_rules():
         elif kind != "IP-ASN":
             direct_domains.append(DomainRule(kind, value))
 
-    for kind, value in parse_rule_lines(fetch_text(EXTERNAL_PROXY_RULESET_URL)):
+    using_cached_proxy_rules = False
+    try:
+        external_proxy_rules = fetch_text(EXTERNAL_PROXY_RULESET_URL)
+    except subprocess.CalledProcessError:
+        using_cached_proxy_rules = True
+        external_proxy_rules = read_text(
+            GEOSITE_SOURCE_ROOT / f"{PROXY_TAG}.txt"
+        )
+
+    for kind, value in parse_rule_lines(external_proxy_rules):
         if kind == "IP-CIDR":
             proxy_cidrs.append(value)
         elif kind != "IP-ASN":
             proxy_domains.append(DomainRule(kind, value))
 
-    for path in sorted((REPO_ROOT / "services").glob("*.lst")):
-        for kind, value in parse_rule_lines(read_text(path)):
-            if kind == "IP-CIDR":
+    if using_cached_proxy_rules:
+        for raw_line in read_text(
+            GEOIP_SOURCE_ROOT / f"{PROXY_TAG}.txt"
+        ).splitlines():
+            value = raw_line.strip()
+            if value and not value.startswith("#"):
                 proxy_cidrs.append(value)
-            elif kind == "IP-ASN":
-                skipped_ip_asn.append(value)
-            else:
-                proxy_domains.append(DomainRule(kind, value))
+    else:
+        for path in sorted((REPO_ROOT / "services").glob("*.lst")):
+            for kind, value in parse_rule_lines(read_text(path)):
+                if kind == "IP-CIDR":
+                    proxy_cidrs.append(value)
+                elif kind == "IP-ASN":
+                    skipped_ip_asn.append(value)
+                else:
+                    proxy_domains.append(DomainRule(kind, value))
 
-    for path in sorted((REPO_ROOT / "ip").glob("*.lst")):
-        for kind, value in parse_rule_lines(read_text(path)):
-            if kind == "IP-CIDR":
-                proxy_cidrs.append(value)
-            elif kind == "IP-ASN":
-                skipped_ip_asn.append(value)
+        for path in sorted((REPO_ROOT / "ip").glob("*.lst")):
+            for kind, value in parse_rule_lines(read_text(path)):
+                if kind == "IP-CIDR":
+                    proxy_cidrs.append(value)
+                elif kind == "IP-ASN":
+                    skipped_ip_asn.append(value)
 
     return {
         "direct_domains": dedupe(direct_domains),
@@ -255,6 +284,61 @@ def build_compact_profile() -> dict[str, object]:
     }
 
 
+def format_inline_domain(rule: DomainRule) -> str:
+    value = normalize_domain(rule.kind, rule.value)
+    if rule.kind == "DOMAIN-SUFFIX":
+        return f"domain:{value}"
+    if rule.kind == "DOMAIN":
+        return f"full:{value}"
+    if rule.kind == "DOMAIN-KEYWORD":
+        return value
+    raise ValueError(f"unsupported domain kind: {rule.kind}")
+
+
+def build_incy_profile(rules: dict[str, object]) -> dict[str, object]:
+    local_cidrs = [
+        "10.0.0.0/8",
+        "100.64.0.0/10",
+        "127.0.0.0/8",
+        "169.254.0.0/16",
+        "172.16.0.0/12",
+        "192.0.0.0/24",
+        "192.0.2.0/24",
+        "192.88.99.0/24",
+        "192.168.0.0/16",
+        "198.18.0.0/15",
+        "198.51.100.0/24",
+        "203.0.113.0/24",
+        "224.0.0.0/4",
+        "255.255.255.255/32",
+    ]
+    return {
+        "Name": "Shadowrocket Equivalent (Incy Inline)",
+        "GlobalProxy": "false",
+        "RemoteDNSType": "DoU",
+        "RemoteDNSDomain": "",
+        "RemoteDNSIP": "1.1.1.1",
+        "DomesticDNSType": "DoU",
+        "DomesticDNSDomain": "",
+        "DomesticDNSIP": "77.88.8.8",
+        "LastUpdated": str(int(time.time())),
+        "DnsHosts": {"localhost": "127.0.0.1"},
+        "DirectSites": [
+            format_inline_domain(rule) for rule in rules["direct_domains"]
+        ],
+        "DirectIp": dedupe([*local_cidrs, *rules["direct_cidrs"]]),
+        "ProxySites": [
+            format_inline_domain(rule) for rule in rules["proxy_domains"]
+        ],
+        "ProxyIp": rules["proxy_cidrs"],
+        "BlockSites": [],
+        "BlockIp": [],
+        "RouteOrder": ["direct", "proxy", "block"],
+        "DomainStrategy": "IPIfNonMatch",
+        "FakeDNS": "false",
+    }
+
+
 def main() -> None:
     rules = collect_rules()
 
@@ -289,6 +373,10 @@ def main() -> None:
     write_text(
         REPO_ROOT / "happ-routing-compact.conf",
         json.dumps(build_compact_profile(), ensure_ascii=False, indent=2) + "\n",
+    )
+    write_text(
+        INCY_ROOT / "routing.json",
+        json.dumps(build_incy_profile(rules), ensure_ascii=False, indent=2) + "\n",
     )
 
     metadata = {
