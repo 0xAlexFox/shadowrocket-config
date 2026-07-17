@@ -9,7 +9,7 @@
   "DomesticDNSIP": "77.88.8.8",
   "Geoipurl": "https://raw.githubusercontent.com/0xAlexFox/shadowrocket-config/refs/heads/master/incy/geoip.dat",
   "Geositeurl": "https://raw.githubusercontent.com/0xAlexFox/shadowrocket-config/refs/heads/master/incy/geosite.dat",
-  "LastUpdated": "1784210161",
+  "LastUpdated": "1784273411",
   "DnsHosts": {
     "localhost": "127.0.0.1"
   },

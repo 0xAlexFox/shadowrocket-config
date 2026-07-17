@@ -116,7 +116,6 @@ def encode_geosite_entry(tag: str, domains: list[DomainRule]) -> bytes:
     payload += encode_string(1, tag)
     for domain in domains:
         payload += encode_length_delimited(2, encode_domain_message(domain))
-    payload += encode_string(4, tag)
     return bytes(payload)
 
 
@@ -133,7 +132,6 @@ def encode_geoip_entry(tag: str, cidrs: list[str]) -> bytes:
     payload += encode_string(1, tag)
     for cidr in cidrs:
         payload += encode_length_delimited(2, encode_cidr_message(cidr))
-    payload += encode_string(5, tag)
     return bytes(payload)
 
 
