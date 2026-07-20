@@ -21,5 +21,3 @@ DOMAIN-SUFFIX,qobuz.akamaized.net,PROXY
 DOMAIN-SUFFIX,qobuz-hifi.akamaized.net,PROXY
 DOMAIN-SUFFIX,qobuz-hls.akamaized.net,PROXY
 DOMAIN-SUFFIX,qobuz-hd.akamaihd.net,PROXY
-DOMAIN-SUFFIX,akamaihd.net,PROXY
-DOMAIN-SUFFIX,akamaized.net,PROXY
